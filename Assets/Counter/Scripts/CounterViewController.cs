@@ -1,3 +1,4 @@
+using FrameWork;
 using System;
 using TMPro;
 using UnityEngine;
@@ -11,44 +12,53 @@ namespace Counter
 
         void Start()
         {
-            CounterModel.OnCountChanged += UpDataView;
-            UpDataView(CounterModel.count);
+            CounterModel.count._OnValueChanged += UpDataView;
+
+            // CounterChangedEvent.Register(UpDataView);
+            //±íÏÖÂß¼­
+            UpDataView(CounterModel.count.value);
             transform.Find("BtnAdd").GetComponent<Button>().onClick.AddListener(() =>
             {
-                CounterModel.count++;
+                //½»»¥Âß¼­
+               new AddCounterCommand().Execute();
             });
 
             transform.Find("BtnSub").GetComponent<Button>().onClick.AddListener(() =>
             {
-                CounterModel.count--;
+                //½»»¥Âß¼­
+                new SubCounterCommand().Execute();
             });
         }
 
-        void UpDataView(int newCount)
+        private void OnDestroy()
+        {
+            //CounterChangedEvent.Unregister(UpDataView);
+            CounterModel.count._OnValueChanged -= UpDataView;
+        }
+
+        void UpDataView(int newValue)
         {
             Debug.Log("UpDataView");
-            transform.Find("Text").GetComponent<TMP_Text>().text = newCount.ToString();
+            transform.Find("Text").GetComponent<TMP_Text>().text = newValue.ToString();
         }
+
     }
+
+
 
     public class CounterModel
     {
-        private static int _count = 0;
-        public static Action<int> OnCountChanged;
-        public static int count
+        public static BindProerty<int> count = new BindProerty<int>
         {
-            get
-            {
-                return _count;
-            }
-            set
-            {
-                if (value != _count)
-                {
-                    _count = value;
-                    OnCountChanged?.Invoke(_count);
-                }
-            }
-        }
+            value = 0
+        };
     }
+
+
+
+
+    //public class CounterChangedEvent : Event<CounterChangedEvent>
+    //{
+
+    //}
 }
