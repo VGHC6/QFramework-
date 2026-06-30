@@ -1,12 +1,11 @@
 namespace FrameWork
 {
-
-    public class GameModel
+    public class GameModel : Singleton<GameModel>
     {
-        public static int KillCounter = 0;
-        public static int Gold = 0;
-        public static int Score = 0;
-        public static int BastScore = 0;
+        private GameModel() { }
+        public BindProerty<int> KillCounter = new BindProerty<int>()
+        {
+            value = 0
+        };
     }
-
 }

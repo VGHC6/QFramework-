@@ -12,15 +12,15 @@ namespace Counter
 
         void Start()
         {
-            CounterModel.count._OnValueChanged += UpDataView;
+            CounterModel.Instance.count._OnValueChanged += UpDataView;
 
             // CounterChangedEvent.Register(UpDataView);
             //±íÏÖÂß¼­
-            UpDataView(CounterModel.count.value);
+            UpDataView(CounterModel.Instance.count.value);
             transform.Find("BtnAdd").GetComponent<Button>().onClick.AddListener(() =>
             {
                 //½»»¥Âß¼­
-               new AddCounterCommand().Execute();
+                new AddCounterCommand().Execute();
             });
 
             transform.Find("BtnSub").GetComponent<Button>().onClick.AddListener(() =>
@@ -33,7 +33,7 @@ namespace Counter
         private void OnDestroy()
         {
             //CounterChangedEvent.Unregister(UpDataView);
-            CounterModel.count._OnValueChanged -= UpDataView;
+            CounterModel.Instance.count._OnValueChanged -= UpDataView;
         }
 
         void UpDataView(int newValue)
@@ -46,9 +46,11 @@ namespace Counter
 
 
 
-    public class CounterModel
+    public class CounterModel : Singleton<CounterModel>
     {
-        public static BindProerty<int> count = new BindProerty<int>
+        private CounterModel() { }
+
+        public BindProerty<int> count = new BindProerty<int>
         {
             value = 0
         };

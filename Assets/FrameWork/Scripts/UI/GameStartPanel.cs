@@ -11,7 +11,7 @@ namespace FrameWork
             transform.Find("BtnStart").GetComponent<Button>().onClick.AddListener(() =>//委托
             {
                 gameObject.SetActive(false);
-                GameStartPanelEvent.Trigger();//触发事件
+                new GameStartCommand().Execute();
             }
             );
         }

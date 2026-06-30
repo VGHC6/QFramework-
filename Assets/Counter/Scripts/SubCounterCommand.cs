@@ -4,7 +4,7 @@ namespace Counter
     {
         public void Execute()
         {
-            CounterModel.count.value--;
+            CounterModel.Instance.count.value--;
         }
     }
 }

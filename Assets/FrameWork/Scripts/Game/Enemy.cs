@@ -9,7 +9,7 @@ namespace FrameWork
         public void OnMouseDown()
         {
             Debug.Log("Enemy clicked");
-            KillOneEnemyEvent.Trigger();
+            new KillOneCommand().Execute();
             Destroy(gameObject);
         }
     }
