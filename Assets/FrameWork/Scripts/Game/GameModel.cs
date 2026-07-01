@@ -1,8 +1,7 @@
 namespace FrameWork
 {
-    public class GameModel : Singleton<GameModel>
+    public class GameModel
     {
-        private GameModel() { }
         public BindProerty<int> KillCounter = new BindProerty<int>()
         {
             value = 0

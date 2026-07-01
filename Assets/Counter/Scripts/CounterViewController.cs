@@ -9,14 +9,16 @@ namespace Counter
 
     public class CounterViewController : MonoBehaviour
     {
-
+        private CounterModel _counterModel;
         void Start()
         {
-            CounterModel.Instance.count._OnValueChanged += UpDataView;
+            _counterModel=CounterApp.Get<CounterModel>();
+
+            _counterModel.count._OnValueChanged += UpDataView;
 
             // CounterChangedEvent.Register(UpDataView);
             //±íÏÖÂß¼­
-            UpDataView(CounterModel.Instance.count.value);
+            UpDataView(_counterModel.count.value);
             transform.Find("BtnAdd").GetComponent<Button>().onClick.AddListener(() =>
             {
                 //½»»¥Âß¼­
@@ -33,7 +35,7 @@ namespace Counter
         private void OnDestroy()
         {
             //CounterChangedEvent.Unregister(UpDataView);
-            CounterModel.Instance.count._OnValueChanged -= UpDataView;
+            _counterModel.count._OnValueChanged -= UpDataView;
         }
 
         void UpDataView(int newValue)
@@ -46,10 +48,8 @@ namespace Counter
 
 
 
-    public class CounterModel : Singleton<CounterModel>
+    public class CounterModel
     {
-        private CounterModel() { }
-
         public BindProerty<int> count = new BindProerty<int>
         {
             value = 0

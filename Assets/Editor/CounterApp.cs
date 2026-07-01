@@ -23,7 +23,7 @@ namespace CouterApp
                new AddCounterCommand().Execute();
             }
 
-            GUILayout.Label(CounterModel.Instance.count.value.ToString());
+            //GUILayout.Label(CounterModel.Instance.count.value.ToString());
 
             if (GUILayout.Button("Sub"))
             {
