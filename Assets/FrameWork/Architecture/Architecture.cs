@@ -1,4 +1,13 @@
-public abstract class Architecture<T> where T : Architecture<T>, new()
+
+public interface IArchitecture
+{
+    T GetUtility<T>() where T : class;
+}
+
+
+
+
+public abstract class Architecture<T> : IArchitecture where T : Architecture<T>, new()
 {
     private static T _architecture;
 
@@ -37,4 +46,8 @@ public abstract class Architecture<T> where T : Architecture<T>, new()
         _architecture._iocContainer.Register<T>(instance);
     }
 
+   public T GetUtility<T>()where T:class
+    {
+        return _iocContainer.Get<T>();
+    }
 }

@@ -4,7 +4,7 @@ namespace Counter
     {
         public void Execute()
         {
-            CounterApp.Get<CounterModel>().count.value--;
+            CounterApp.Get<IConterModel>().count.value--;
         }
     }
 }

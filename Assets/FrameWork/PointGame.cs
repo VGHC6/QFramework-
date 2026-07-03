@@ -10,7 +10,7 @@ namespace FarameWork
     {
         protected override void init()
         {
-            Register(new GameModel());
+            Register<IGameModel>(new GameModel());
         }
     }
 }

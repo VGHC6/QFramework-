@@ -9,10 +9,10 @@ namespace Counter
 
     public class CounterViewController : MonoBehaviour
     {
-        private CounterModel _counterModel;
+        private IConterModel _counterModel;
         void Start()
         {
-            _counterModel=CounterApp.Get<CounterModel>();
+            _counterModel = CounterApp.Get<IConterModel>();
 
             _counterModel.count._OnValueChanged += UpDataView;
 
@@ -47,10 +47,25 @@ namespace Counter
     }
 
 
-
-    public class CounterModel
+    public interface IConterModel
     {
-        public BindProerty<int> count = new BindProerty<int>
+        BindProerty<int> count { get; }
+    }
+
+
+    public class CounterModel : IConterModel
+    {
+        public CounterModel()
+        {
+            var storage = CounterApp.Get<IStorage>();
+
+            count.value = storage.LoadInt("COUNTER_COUNT", 0);
+            count._OnValueChanged += count =>
+            {
+                storage.SaveInt("COUNTER_COUNT", count);
+            };
+        }
+        public BindProerty<int> count { get; } = new BindProerty<int>
         {
             value = 0
         };

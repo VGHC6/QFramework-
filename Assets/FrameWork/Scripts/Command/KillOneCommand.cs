@@ -7,7 +7,7 @@ namespace FrameWork{
     {
         public void Execute()
         {
-            var gameModel= PointGame.Get<GameModel>();
+            var gameModel= PointGame.Get<IGameModel>();
             gameModel.KillCounter.value++;
             KillOneEnemyEvent.Trigger();
 
