@@ -4,8 +4,9 @@ namespace Counter
     {
         protected override void init()
         {
-            Register<IStorage>(new PlayerStorage());
-            Register<IConterModel>(new CounterModel());//使用IConterModel接口注册CounterModel，后续可以直接更改为其他的ICounterModel子类
+            RegisterSystem<IAcheivementSystem>(new AcheivementSystem());
+            RegisterModel<IStorage>(new PlayerStorage());
+            RegisterUtility<IConterModel>(new CounterModel());//使用IConterModel接口注册CounterModel，后续可以直接更改为其他的ICounterModel子类
         }
     }
 }

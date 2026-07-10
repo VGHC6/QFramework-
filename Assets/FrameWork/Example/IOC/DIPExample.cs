@@ -2,7 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
-namespace FrameWork
+namespace Framework
 {
     public class DIPExample : MonoBehaviour
     {

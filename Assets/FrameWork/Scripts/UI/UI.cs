@@ -1,24 +1,30 @@
-using FrameWork;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class UI : MonoBehaviour
+namespace Framework
 {
-    // Start is called before the first frame update
-    void Awake()
-    {
-        GamePassPanelEvent.Register(OnGameStartPanelEvent);
-    }
 
-    private void OnGameStartPanelEvent()
-    {
-        transform.Find("Canvas/GamepassPanel").gameObject.SetActive(true);
-    }
 
-    void OnDestroy()
+    public class UI : MonoBehaviour, IController
     {
-        GamePassPanelEvent.Unregister(OnGameStartPanelEvent);
+        // Start is called before the first frame update
+        void Awake()
+        {
+            this.RegisterEvent<GamePassPanelEvent>(OnGameStartPanelEvent);
+        }
+
+        private void OnGameStartPanelEvent(GamePassPanelEvent e)
+        {
+            transform.Find("Canvas/GamepassPanel").gameObject.SetActive(true);
+        }
+
+        void OnDestroy()
+        {
+            this.UnRegisterEvent<GamePassPanelEvent>(OnGameStartPanelEvent);
+        }
+
+        public IArchitecture _GetArchitecture()
+        {
+            return PointGame.Interface;
+        }
     }
 }

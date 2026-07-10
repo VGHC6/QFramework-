@@ -1,6 +1,6 @@
-namespace FrameWork
+namespace Framework
 {
-    public class GameStartPanelEvent:Event<GameStartPanelEvent>
+    public class GameStartPanelEvent
     { 
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Counter
 {
-    public interface IStorage
+    public interface IStorage:IUtility
     {
         public void SaveInt(string key, int defaultValue = 0);
         public int LoadInt(string key, int defaultValue = 0);

@@ -1,10 +1,10 @@
 namespace Counter
 {
-    public struct AddCounterCommand : ICommand
+    public class AddCounterCommand : AbstructCommand
     {
-        public void Execute()
+        protected override void OnExecute()
         {
-            CounterApp.Get<IConterModel>().count.value++;
+            this.GetModel<IConterModel>().count.value++;
         }
     }
 }

@@ -1,10 +1,10 @@
 namespace Counter
 {
-    public class SubCounterCommand : ICommand
+    public class SubCounterCommand : AbstructCommand
     {
-        public void Execute()
+        protected override void OnExecute()
         {
-            CounterApp.Get<IConterModel>().count.value--;
+            this.GetModel<IConterModel>().count.value--;
         }
     }
 }

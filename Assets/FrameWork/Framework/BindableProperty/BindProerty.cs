@@ -1,11 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-
-namespace FrameWork
-{
     public class BindProerty<T> where T : IEquatable<T>//可比较的
     {
         private T _value = default(T);//默认值
@@ -26,4 +20,3 @@ namespace FrameWork
             }
         }
     }
-}

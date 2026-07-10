@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace FrameWork
+namespace Framework
 {
     public class IOCExample : MonoBehaviour
     {

@@ -1,23 +1,26 @@
-using Framework;
-using System;
 using UnityEngine;
 
-namespace FrameWork
+namespace Framework
 {
 
-    public class Game : MonoBehaviour
+    public class Game : MonoBehaviour, IController
     {
+        public IArchitecture _GetArchitecture()
+        {
+            return PointGame.Interface;
+        }
+
         private void Awake()
         {
-            GameStartPanelEvent.Register(OnGameStart);
+            this.RegisterEvent<GameStartPanelEvent>(OnGameStart);
         }
 
         private void OnDestroy()
         {
-            GameStartPanelEvent.Unregister(OnGameStart);
+            this.UnRegisterEvent<GameStartPanelEvent>(OnGameStart);
         }
 
-        private void OnGameStart()
+        private void OnGameStart(GameStartPanelEvent e)
         {
             transform.Find("enemies").gameObject.SetActive(true);
         }

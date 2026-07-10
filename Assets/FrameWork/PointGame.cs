@@ -1,10 +1,6 @@
-using Counter;
-using FrameWork;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-namespace FarameWork
+
+namespace Framework
 {
     public class PointGame : Architecture<PointGame>
     {

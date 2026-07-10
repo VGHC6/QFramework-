@@ -1,19 +1,21 @@
-using FarameWork;
-using Framework;
-using System.Drawing;
-
-namespace FrameWork{
-    public struct KillOneCommand : ICommand
+namespace Framework
+{
+    public class KillOneCommand : AbstructCommand
     {
-        public void Execute()
+
+
+        protected override void OnExecute()
         {
-            var gameModel= PointGame.Get<IGameModel>();
+            var gameModel =this.GetModel<IGameModel>();
             gameModel.KillCounter.value++;
-            KillOneEnemyEvent.Trigger();
+            this.SendEvent<KillOneEnemyEvent>();
+            //KillOneEnemyEvent.Trigger();
 
             if (gameModel.KillCounter.value == 10)
             {
-                GamePassPanelEvent.Trigger();
+                this.SendEvent<GamePassPanelEvent>();
+
+                //GamePassPanelEvent.Trigger();
             }
         }
     }

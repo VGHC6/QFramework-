@@ -1,6 +1,6 @@
-namespace FrameWork
+namespace Framework
 {
-    public class GamePassPanelEvent: Event<GamePassPanelEvent>
+    public class GamePassPanelEvent
     {
       
     }

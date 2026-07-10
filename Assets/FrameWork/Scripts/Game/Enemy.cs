@@ -1,16 +1,22 @@
-using Framework;
 using UnityEngine;
 
-namespace FrameWork
+namespace Framework
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IController
     {
         public GameObject _gameObject;
+
         public void OnMouseDown()
         {
             Debug.Log("Enemy clicked");
-            new KillOneCommand().Execute();
+            this.SendCommand<KillOneCommand>();
+
             Destroy(gameObject);
+        }
+
+        IArchitecture IBelongArchitecture._GetArchitecture()
+        {
+            return PointGame.Interface;
         }
     }
 }

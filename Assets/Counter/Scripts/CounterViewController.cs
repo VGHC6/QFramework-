@@ -1,4 +1,3 @@
-using FrameWork;
 using System;
 using TMPro;
 using UnityEngine;
@@ -7,28 +6,33 @@ using UnityEngine.UI;
 namespace Counter
 {
 
-    public class CounterViewController : MonoBehaviour
+    public class CounterViewController : MonoBehaviour, IController
     {
         private IConterModel _counterModel;
+
+        public IArchitecture _architecture { get; set; }
+
         void Start()
         {
-            _counterModel = CounterApp.Get<IConterModel>();
+            _counterModel = this.GetModel<IConterModel>();
 
             _counterModel.count._OnValueChanged += UpDataView;
 
             // CounterChangedEvent.Register(UpDataView);
-            //±íÏÖÂß¼­
+            //è¡¨çŽ°é€»è¾‘
             UpDataView(_counterModel.count.value);
             transform.Find("BtnAdd").GetComponent<Button>().onClick.AddListener(() =>
             {
-                //½»»¥Âß¼­
-                new AddCounterCommand().Execute();
+                //äº¤äº’é€»è¾‘
+                this.SendCommand<AddCounterCommand>();
+
             });
 
             transform.Find("BtnSub").GetComponent<Button>().onClick.AddListener(() =>
             {
-                //½»»¥Âß¼­
-                new SubCounterCommand().Execute();
+                //äº¤äº’é€»è¾‘
+                this.SendCommand<SubCounterCommand>();
+
             });
         }
 
@@ -40,24 +44,28 @@ namespace Counter
 
         void UpDataView(int newValue)
         {
-            Debug.Log("UpDataView");
+            //Debug.Log("UpDataView");
             transform.Find("Text").GetComponent<TMP_Text>().text = newValue.ToString();
         }
 
+        IArchitecture IBelongArchitecture._GetArchitecture()
+        {
+            return CounterApp.Interface;
+        }
     }
 
 
-    public interface IConterModel
+    public interface IConterModel : IMode, IUtility
     {
         BindProerty<int> count { get; }
     }
 
 
-    public class CounterModel : IConterModel
+    public class CounterModel : AbstactMode, IConterModel
     {
-        public CounterModel()
+        protected override void OnInit()
         {
-            var storage = CounterApp.Get<IStorage>();
+            var storage =this.GetUtility<IStorage>();
 
             count.value = storage.LoadInt("COUNTER_COUNT", 0);
             count._OnValueChanged += count =>
@@ -65,6 +73,7 @@ namespace Counter
                 storage.SaveInt("COUNTER_COUNT", count);
             };
         }
+
         public BindProerty<int> count { get; } = new BindProerty<int>
         {
             value = 0

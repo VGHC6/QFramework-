@@ -1,10 +1,10 @@
-namespace FrameWork
+namespace Framework
 {
-    public class GameStartCommand : ICommand
+    public class GameStartCommand : AbstructCommand
     {
-        public void Execute()
+        protected override void OnExecute()
         {
-            GameStartPanelEvent.Trigger();
+            this.SendEvent< GameStartPanelEvent >();
         }
     }
 }
