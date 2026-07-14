@@ -2,8 +2,6 @@ namespace Framework
 {
     public class KillOneCommand : AbstructCommand
     {
-
-
         protected override void OnExecute()
         {
             var gameModel =this.GetModel<IGameModel>();

@@ -6,7 +6,9 @@ namespace Framework
     {
         protected override void init()
         {
-            Register<IGameModel>(new GameModel());
+            RegisterSystem<ISorageSystem>(new StorageSystem());
+            RegisterUtility<IGameModel>(new GameModel());
+            RegisterModel<IStorage>(new PlayerPrefsStorage());
         }
     }
 }

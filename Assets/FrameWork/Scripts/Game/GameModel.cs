@@ -1,24 +1,27 @@
-namespace Framework
+using UnityEngine;
+public interface IGameModel : IMode
 {
+    BindProerty<int> KillCounter { get; }
+    BindProerty<int> score { get; }
+}
 
-    public interface IGameModel:IMode
+public class GameModel : AbstactMode, IGameModel
+{
+    public BindProerty<int> KillCounter { get; } = new BindProerty<int>
     {
-        public BindProerty<int> KillCounter { get; }
-    }
+        value = 0
+    };
 
-    public class GameModel :AbstructCommand, IGameModel
+    public BindProerty<int> score { get; } = new BindProerty<int>
     {
-        BindProerty<int> IGameModel.KillCounter { get; } = new BindProerty<int>
-        {
-            value = 0
-        };
+        value = 0
+    };
 
-        public void Init()
-        {
-        }
+    protected override void OnInit()
+    {
+        var storage = this.GetUtility<IStorage>();
+        score.value = storage.LoadInt(nameof(score), 0);
+        score._OnValueChanged += v => storage.SaveInt(nameof(score), v);
 
-        protected override void OnExecute()
-        {
-        }
     }
 }
