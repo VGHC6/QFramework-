@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISystem : IBelongArchitecture, ICanSetArchitecture, ICanGetModel,ICanSendEvent,ICanRegisterEvent
+public interface ISystem : IBelongArchitecture, ICanSetArchitecture, ICanGetModel,ICanSendEvent,ICanRegisterEvent,ICanGetSystem
 {
     void Init();
 }

@@ -84,27 +84,7 @@ public abstract class Architecture<T> : IArchitecture where T : Architecture<T>,
 
     private IOCContainer _iocContainer = new IOCContainer();//µ¥ÀýÈÝÆ÷
 
-    /// <summary>
-    /// µÃµ½
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public static T Get<T>() where T : class
-    {
-        MakeSureArchitecture();
-        return _architecture._iocContainer.Get<T>();
-    }
 
-    /// <summary>
-    /// ×¢²á
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="instance"></param>
-    public static void Register<T>(T instance)
-    {
-        MakeSureArchitecture();
-        _architecture._iocContainer.Register<T>(instance);
-    }
 
 
     /// <summary>

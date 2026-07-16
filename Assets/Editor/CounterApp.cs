@@ -32,7 +32,7 @@ namespace Counter
                 this.SendCommand<AddCounterCommand>();
             }
 
-            GUILayout.Label(CounterApp.Get<IConterModel>().count.value.ToString());
+            //GUILayout.Label(CounterApp.Get<IConterModel>().count.value.ToString());
 
             if (GUILayout.Button("Sub"))
             {

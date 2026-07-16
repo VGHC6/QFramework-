@@ -16,11 +16,22 @@ public class StorageSystem : AbstactSystem, ISorageSystem
 
         this.RegisterEvent<GamePassPanelEvent>(e =>
         {
-            gameModel.score.value = Random.Range(0, 100);
             if (gameModel.KillCounter.value >= gameModel.score.value)
             {
                 gameModel.score.value = gameModel.KillCounter.value;
             }
+        });
+
+
+        this.RegisterEvent<OnEnemyKillEvent>(e =>
+        {
+            gameModel.score.value += 10;
+        });
+
+        this.RegisterEvent<OnMissEvent>(e =>
+        {
+            gameModel.score.value -= 10;
+            //Debug.Log("miss");
         });
     }
 }
